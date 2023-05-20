@@ -22,12 +22,12 @@ To make use of this example installation repository, you can follow these steps:
 
 1. Clone the repository: Start by cloning this repository to your local machine. You can use the following command:
 ```shell
-git clone https://github.com/koad/alice.git ~/.alice && koad-io init alice
+git clone https://github.com/koad/alice.git ~/.alice
 ```
 
 2. Initialize Alice as an existing koad:io entity.  koad-io will assume Alice exists in the `~/.alice` folder.
 ```shell
-git clone https://github.com/koad/alice.git ~/.alice && koad-io init alice
+koad-io init alice
 ```
 
 3. Customize and adapt: Once you have the repository cloned, feel free to explore the `commands` and `modules` directories. Review the example commands provided and modify them according to your needs. You can also create your own commands and modules within their respective directories to tailor your koad:io environment to your specific requirements.
