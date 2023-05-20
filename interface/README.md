@@ -1,10 +1,10 @@
 # Alice's Interface
 
-Welcome to the `interface` folder of Alice's koad/io installation repository! This folder contains a Meteor application that serves as the user interface for Alice's koad/io environment. The interface leverages the power of Meteor and utilizes packages from the `~/.koad-io/packages` folder and `~/.alice/packages` folder to display relevant information and provide interactive features.
+Welcome to the `interface` folder of Alice's koad:io installation repository! This folder contains a Meteor application that serves as the user interface for Alice's koad:io environment. The interface leverages the power of Meteor and utilizes packages from the `~/.koad-io/packages` folder and `~/.alice/packages` folder to display relevant information and provide interactive features.
 
 ## Overview
 
-The `interface` folder is structured as a typical Meteor application. It includes client-side code, server-side code, and HTML templates to create a dynamic and responsive user interface. The interface is designed to interact with the underlying components and services of Alice's koad/io installation, such as the Lighthouse and MongoDB.
+The `interface` folder is structured as a typical Meteor application. It includes client-side code, server-side code, and HTML templates to create a dynamic and responsive user interface. The interface is designed to interact with the underlying components and services of Alice's koad:io installation, such as the Lighthouse and MongoDB.
 
 ## Open the interface
 
@@ -22,7 +22,7 @@ To set up and run the interface, follow these steps:
 
 ## Usage
 
-The interface provides a user-friendly way to interact with Alice's koad/io environment and access various features and information. It leverages the packages located in the `~/.koad-io/packages` folder and `~/.alice/packages` folder to display relevant data and enable interactive functionalities.
+The interface provides a user-friendly way to interact with Alice's koad:io environment and access various features and information. It leverages the packages located in the `~/.koad-io/packages` folder and `~/.alice/packages` folder to display relevant data and enable interactive functionalities.
 
 By accessing the interface, you can:
 
@@ -31,7 +31,7 @@ By accessing the interface, you can:
 - Access and manipulate data stored in the associated MongoDB database.
 - Perform various operations and actions specific to the installed packages and extensions.
 
-Feel free to explore the interface and its features to discover the full potential of Alice's koad/io installation.
+Feel free to explore the interface and its features to discover the full potential of Alice's koad:io installation.
 
 ## Customization
 
@@ -43,4 +43,4 @@ Contributions to the `interface` folder of Alice's installation repository are w
 
 ## Conclusion
 
-The `interface` folder of Alice's koad/io installation repository serves as the user interface for her koad/io environment. It leverages Meteor and packages from the `~/.koad-io/packages` folder and `~/.alice/packages` folder to provide a powerful and interactive interface for managing and interacting with various components and services. Explore the interface, customize it to your liking, and use it to streamline your workflows within Alice's koad/io installation.
+The `interface` folder of Alice's koad:io installation repository serves as the user interface for her koad:io environment. It leverages Meteor and packages from the `~/.koad-io/packages` folder and `~/.alice/packages` folder to provide a powerful and interactive interface for managing and interacting with various components and services. Explore the interface, customize it to your liking, and use it to streamline your workflows within Alice's koad:io installation.
