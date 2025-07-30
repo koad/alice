@@ -8,12 +8,6 @@ The example installation repository, named "alice" in this case, follows a struc
 
 - `commands/`: This directory contains a collection of example commands that demonstrate the capabilities and flexibility of koad:io. These commands are provided as samples to help you understand how to create your own commands. Feel free to explore, modify, or expand upon these examples to suit your specific needs.
 
-- `modules/`: The `modules` directory holds additional modules or functionalities that can be integrated into your koad:io environment. These modules can extend the capabilities of your installation, provide access to external services, or offer specific functionalities that align with your requirements.
-
-- `lighthouse/`: The `lighthouse` directory, located within the `skeletons` folder, showcases an example of a lighthouse module. It serves as a starting point for creating your own lighthouse modules within your koad:io installation.
-
-- `packages/`: This folder is an auxiliary component that contains user interface elements written for Meteor/Blaze. These packages offer pre-built UI components that can be used within your koad:io environment. They facilitate the creation of interactive dashboards and visualizations to monitor the state and activities of your system.
-
 - `README.md`: This file provides an overview of the example installation repository and explains the purpose and structure of its contents.
 
 ## Getting Started
@@ -30,11 +24,19 @@ git clone https://github.com/koad/alice.git ~/.alice
 koad-io init alice
 ```
 
-3. Customize and adapt: Once you have the repository cloned, feel free to explore the `commands` and `modules` directories. Review the example commands provided and modify them according to your needs. You can also create your own commands and modules within their respective directories to tailor your koad:io environment to your specific requirements.
+3. Use Alice to setup your new computer.
+```bash
+alice install essentials
+alice install keybase
+alice install zeroteir
+alice install starship
+alice install browsers
+alice install nodejs
+alice install meteor
+alice install sublime
+alice install codium
+```
 
-4. Execute commands: With the modified or newly created commands and modules in place, you can start using them within your koad:io environment. Use the `koad-io` script, provided in your main koad:io installation, to execute the commands and leverage the functionalities you have implemented.
-
-5. Explore the packages: If you wish to utilize the user interface components provided in the `packages` folder, follow the instructions in the corresponding README.md file within that directory. Set up the necessary configurations and integrate the packages into your koad:io interface to enhance the user experience.
 
 ## Contributing
 
