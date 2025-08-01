@@ -46,8 +46,8 @@ NC='\033[0m' # No Color
 echo -e "${GREEN}[info]${NC} Starting workspace transfer process..."
 
 REMOTE_ARG="$1"
-UNPACK=false
-[[ "$2" == "--unpack" ]] && UNPACK=true
+SKIP_UNPACK=false
+[[ "$2" == "--tarball" ]] && SKIP_UNPACK=true
 
 if [[ -z "$REMOTE_ARG" ]]; then
     echo -e "${RED}[error]${NC} No remote argument provided"
@@ -65,7 +65,10 @@ echo -e "${GREEN}[info]${NC} Remote host: $REMOTE_HOST"
 echo -e "${GREEN}[info]${NC} Remote path: $REMOTE_PATH"
 echo -e "${GREEN}[info]${NC} Target folder: $BASENAME"
 
-TMP_NAME="transfer_$(basename "$REMOTE_ARG")_$(date +%s).tar.gz"
+HOSTNAME=$(ssh "$REMOTE_HOST" "hostname")
+CURRENT_DATE=$(date +%Y-%m-%d-%H-%M)
+PACKAGE_NAME="${CURRENT_DATE}-${BASENAME}-from-${HOSTNAME}"
+TMP_NAME="${PACKAGE_NAME}.tar.gz"
 
 # Check /dev/shm available space on REMOTE system
 echo -e "${GREEN}[info]${NC} Checking remote /dev/shm available space..."
@@ -133,10 +136,11 @@ fi
 echo -e "${GREEN}[info]${NC} Cleaning up remote temporary file..."
 ssh "$REMOTE_HOST" "rm -f '$TMP_PATH'"
 
-# Optional local unpack
-if $UNPACK; then
+# Local unpack (default behavior)
+if ! $SKIP_UNPACK; then
     echo -e "${GREEN}[info]${NC} Unpacking archive locally..."
-    if tar -xzf "$TMP_NAME"; then
+    mkdir -p "$BASENAME"
+    if tar -xzf "$TMP_NAME" -C "$BASENAME"; then
         echo -e "${GREEN}[info]${NC} Archive unpacked successfully to ./$BASENAME/"
         rm -f "$TMP_NAME"
         echo -e "${GREEN}[info]${NC} Temporary archive file removed"
