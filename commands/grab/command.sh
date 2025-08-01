@@ -33,9 +33,17 @@
 #
 #==============================================================================
 
-# Usage: ./grab_remote_folder.sh user@host:/path/to/folder [--unpack]
+# Usage: ./grab_remote_folder.sh user@host:/path/to/folder [--tarball]
 
 set -e  # Exit on any error
+
+# Define common exclusions
+EXCLUDES=(
+  "node_modules"
+  ".npm"
+  "local"
+  ".local"
+)
 
 # Color definitions
 GREEN='\033[0;32m'
@@ -88,23 +96,25 @@ fi
 echo -e "${GREEN}[info]${NC} Temporary file will be: $TMP_PATH"
 
 # Count files before compression (with exclusions)
-echo -e "${GREEN}[info]${NC} Counting files in remote directory (excluding node_modules, .npm, .local)..."
-FILE_COUNT=$(ssh "$REMOTE_HOST" "find '$REMOTE_PATH' -type f \
-  ! -path '*/node_modules/*' \
-  ! -path '*/.npm/*' \
-  ! -path '*/local/*' \
-  ! -path '*/.local/*' \
-  | wc -l")
+EXCLUDE_FIND_ARGS=""
+for EXCL in "${EXCLUDES[@]}"; do
+  EXCLUDE_FIND_ARGS+="! -path '*/$EXCL/*' "
+done
+
+echo -e "${GREEN}[info]${NC} Counting files in remote directory (with exclusions)..."
+FILE_COUNT=$(ssh "$REMOTE_HOST" "find '$REMOTE_PATH' -type f $EXCLUDE_FIND_ARGS | wc -l")
 echo -e "${GREEN}[info]${NC} Found $FILE_COUNT files to transfer"
 
 # SSH: tar folder into shared memory with recursive exclusions
 echo -e "${GREEN}[info]${NC} Creating compressed archive on remote system..."
+EXCLUDE_TAR_ARGS=""
+for EXCL in "${EXCLUDES[@]}"; do
+  EXCLUDE_TAR_ARGS+="--exclude='*/$EXCL' "
+done
+
 if ssh "$REMOTE_HOST" "tar -czf '$TMP_PATH' \
-  --exclude='*/node_modules' \
-  --exclude='*/.npm' \
-  --exclude='*/local' \
-  --exclude='*/.local' \
-  -C '$DIRNAME' '$BASENAME'"; then
+  $EXCLUDE_TAR_ARGS \
+  -C '$REMOTE_PATH' ."; then
     echo -e "${GREEN}[info]${NC} Archive created successfully"
 else
     echo -e "${RED}[error]${NC} Failed to create archive"
