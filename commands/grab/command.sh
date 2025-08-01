@@ -160,9 +160,9 @@ ssh "$REMOTE_HOST" "rm -f '$TMP_PATH'"
 # Local unpack (default behavior)
 if ! $SKIP_UNPACK; then
     echo -e "${GREEN}[info]${NC} Unpacking archive locally..."
-    mkdir -p "$BASENAME"
-    if tar -xzf "$TMP_NAME" -C "$BASENAME"; then
-        echo -e "${GREEN}[info]${NC} Archive unpacked successfully to ./$BASENAME/"
+    mkdir -p "$PACKAGE_NAME"
+    if tar -xzf "$TMP_NAME" -C "$PACKAGE_NAME"; then
+        echo -e "${GREEN}[info]${NC} Archive unpacked successfully to ./$PACKAGE_NAME/"
         rm -f "$TMP_NAME"
         echo -e "${GREEN}[info]${NC} Temporary archive file removed"
     else
