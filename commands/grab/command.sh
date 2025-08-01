@@ -85,7 +85,7 @@ echo -e "${GREEN}[info]${NC} Remote path: $REMOTE_PATH"
 echo -e "${GREEN}[info]${NC} Target folder: $BASENAME"
 
 HOSTNAME=$(ssh "$REMOTE_HOST" "hostname")
-CURRENT_DATE=$(date +%Y-%m-%d-%H-%M)
+CURRENT_DATE=$(date +%Y-%m-%d-%H-%M-%S)
 PACKAGE_NAME="${CURRENT_DATE}-${BASENAME}-from-${HOSTNAME}"
 TMP_NAME="${PACKAGE_NAME}.tar.gz"
 
