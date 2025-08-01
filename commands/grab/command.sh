@@ -70,6 +70,17 @@ BASENAME="$(basename "$REMOTE_PATH")"
 DIRNAME="$(dirname "$REMOTE_PATH")"
 
 echo -e "${GREEN}[info]${NC} Remote host: $REMOTE_HOST"
+
+# Check if the host is reachable
+# Check if the remote folder exists
+echo -e "${GREEN}[info]${NC} Verifying remote folder existence: $REMOTE_PATH..."
+if ssh "$REMOTE_HOST" "ls -d '$REMOTE_PATH'" &>/dev/null; then
+    echo -e "${GREEN}[info]${NC} Remote folder $REMOTE_PATH exists."
+else
+    echo -e "${RED}[error]${NC} Remote folder $REMOTE_PATH does not exist or is not accessible. Please check the path."
+    exit 1
+fi
+
 echo -e "${GREEN}[info]${NC} Remote path: $REMOTE_PATH"
 echo -e "${GREEN}[info]${NC} Target folder: $BASENAME"
 
