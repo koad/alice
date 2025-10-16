@@ -3,27 +3,6 @@
 # Nginx Installation Script with Let's Encrypt
 # This script installs Nginx web server with Let's Encrypt SSL certificate support
 
-# Error handling function
-handle_error() {
-    echo "Error occurred during installation. Attempting to fix..."
-    case "${DISTRO}" in
-        ubuntu|debian)
-            echo "Running dpkg --configure -a to fix interrupted installations..."
-            sudo dpkg --configure -a
-            echo "Running apt --fix-broken install..."
-            sudo apt-get --fix-broken install -y
-            ;;
-        fedora)
-            echo "Cleaning dnf cache..."
-            sudo dnf clean all
-            ;;
-        centos|rhel)
-            echo "Cleaning yum cache..."
-            sudo yum clean all
-            ;;
-    esac
-}
-
 # Step 1: Detect the operating system
 echo "Detecting operating system..."
 OS="$(uname -s)"
@@ -62,120 +41,105 @@ case "${OS}" in
         ;;
 esac
 
+# Function to install latest stable Certbot via pip
+install_certbot_pip() {
+    echo "Installing latest stable Certbot via pip..."
+
+    # Remove any existing certbot packages from package managers
+    echo "Removing any existing certbot packages from package managers..."
+    case "${DISTRO}" in
+        ubuntu|debian)
+            sudo apt remove -y certbot python3-certbot-nginx 2>/dev/null || true
+            # Install Python3 and pip if not present
+            sudo apt install -y python3 python3-pip python3-venv
+            ;;
+        fedora)
+            sudo dnf remove -y certbot python3-certbot-nginx 2>/dev/null || true
+            # Install Python3 and pip if not present
+            sudo dnf install -y python3 python3-pip
+            ;;
+        centos|rhel)
+            sudo yum remove -y certbot python3-certbot-nginx 2>/dev/null || true
+            # Install Python3 and pip if not present
+            sudo yum install -y python3 python3-pip
+            ;;
+        arch|manjaro)
+            sudo pacman -R --noconfirm certbot certbot-nginx 2>/dev/null || true
+            # Install Python3 and pip if not present
+            sudo pacman -S --noconfirm python python-pip
+            ;;
+    esac
+
+    # Install certbot using pip in a virtual environment (recommended method)
+    echo "Creating Python virtual environment for Certbot..."
+    sudo python3 -m venv /opt/certbot
+    
+    echo "Installing Certbot and Nginx plugin..."
+    sudo /opt/certbot/bin/pip install --upgrade pip
+    sudo /opt/certbot/bin/pip install certbot certbot-nginx
+
+    # Create symbolic link to ensure certbot command is in PATH
+    echo "Creating certbot symbolic link..."
+    sudo ln -sf /opt/certbot/bin/certbot /usr/bin/certbot
+
+    echo "Certbot installed successfully via pip!"
+    echo "Certbot version: $(/usr/bin/certbot --version 2>&1)"
+}
+
 # Function to install Nginx and Certbot on Linux
 install_linux_nginx() {
     echo "Installing Nginx and Let's Encrypt on Linux ($DISTRO)..."
 
     case "${DISTRO}" in
         ubuntu|debian)
-            echo "Installing Nginx and Certbot via apt..."
-
-            # Fix any interrupted dpkg operations first
-            echo "Checking for interrupted dpkg operations..."
-            sudo dpkg --configure -a
+            echo "Installing Nginx via apt..."
 
             # Update package index
             sudo apt update
 
             # Install Nginx
             echo "Installing Nginx..."
-            if ! sudo apt install -y nginx; then
-                echo "Error installing Nginx. Attempting to fix broken packages..."
-                handle_error
-                sudo apt install -y nginx
-            fi
-
-            # Install Certbot and Nginx plugin
-            echo "Installing Certbot and Nginx plugin..."
-            if ! sudo apt install -y certbot python3-certbot-nginx; then
-                echo "Error installing Certbot. Attempting to fix broken packages..."
-                handle_error
-                sudo apt install -y certbot python3-certbot-nginx
-            fi
+            sudo apt install -y nginx
 
             # Install additional useful packages including Fail2ban
             echo "Installing additional packages..."
-            if ! sudo apt install -y ufw curl wget fail2ban; then
-                echo "Error installing additional packages. Attempting to fix broken packages..."
-                handle_error
-                sudo apt install -y ufw curl wget fail2ban
-            fi
+            sudo apt install -y ufw curl wget fail2ban
             ;;
 
         fedora)
-            echo "Installing Nginx and Certbot via dnf..."
+            echo "Installing Nginx via dnf..."
 
             # Install Nginx
             echo "Installing Nginx..."
-            if ! sudo dnf install -y nginx; then
-                echo "Error installing Nginx. Retrying..."
-                handle_error
-                sudo dnf install -y nginx
-            fi
-
-            # Install Certbot and Nginx plugin
-            echo "Installing Certbot and Nginx plugin..."
-            if ! sudo dnf install -y certbot python3-certbot-nginx; then
-                echo "Error installing Certbot. Retrying..."
-                handle_error
-                sudo dnf install -y certbot python3-certbot-nginx
-            fi
+            sudo dnf install -y nginx
 
             # Install additional useful packages including Fail2ban
             echo "Installing additional packages..."
-            if ! sudo dnf install -y firewalld curl wget fail2ban; then
-                echo "Error installing additional packages. Retrying..."
-                handle_error
-                sudo dnf install -y firewalld curl wget fail2ban
-            fi
+            sudo dnf install -y firewalld curl wget fail2ban
             ;;
 
         centos|rhel)
-            echo "Installing Nginx and Certbot via yum..."
+            echo "Installing Nginx via yum..."
 
             # Enable EPEL repository
             echo "Enabling EPEL repository..."
-            if ! sudo yum install -y epel-release; then
-                echo "Error installing EPEL repository. Retrying..."
-                handle_error
-                sudo yum install -y epel-release
-            fi
+            sudo yum install -y epel-release
 
             # Install Nginx
             echo "Installing Nginx..."
-            if ! sudo yum install -y nginx; then
-                echo "Error installing Nginx. Retrying..."
-                handle_error
-                sudo yum install -y nginx
-            fi
-
-            # Install Certbot and Nginx plugin
-            echo "Installing Certbot and Nginx plugin..."
-            if ! sudo yum install -y certbot python3-certbot-nginx; then
-                echo "Error installing Certbot. Retrying..."
-                handle_error
-                sudo yum install -y certbot python3-certbot-nginx
-            fi
+            sudo yum install -y nginx
 
             # Install additional useful packages including Fail2ban
             echo "Installing additional packages..."
-            if ! sudo yum install -y firewalld curl wget fail2ban; then
-                echo "Error installing additional packages. Retrying..."
-                handle_error
-                sudo yum install -y firewalld curl wget fail2ban
-            fi
+            sudo yum install -y firewalld curl wget fail2ban
             ;;
 
         arch|manjaro)
-            echo "Installing Nginx and Certbot via pacman..."
+            echo "Installing Nginx via pacman..."
 
             # Install Nginx
             echo "Installing Nginx..."
             sudo pacman -S --noconfirm nginx
-
-            # Install Certbot and Nginx plugin
-            echo "Installing Certbot and Nginx plugin..."
-            sudo pacman -S --noconfirm certbot certbot-nginx
 
             # Install additional useful packages including Fail2ban
             echo "Installing additional packages..."
@@ -188,6 +152,9 @@ install_linux_nginx() {
             return 1
             ;;
     esac
+
+    # Install latest stable Certbot via pip
+    install_certbot_pip
 
     # Start and enable Nginx service
     echo "Starting and enabling Nginx service..."
@@ -242,11 +209,41 @@ configure_firewall() {
 configure_fail2ban() {
     echo "Configuring Fail2ban for Nginx protection..."
 
+    # Detect ZeroTier interfaces
+    echo "Detecting ZeroTier network interfaces..."
+    ZEROTIER_IPS=""
+    if command -v zerotier-cli &> /dev/null; then
+        # Get ZeroTier network IPs
+        ZEROTIER_IPS=$(ip addr show | grep -E "zt[0-9]+" -A 2 | grep "inet " | awk '{print $2}' | cut -d'/' -f1 | tr '\n' ' ')
+        if [ -n "$ZEROTIER_IPS" ]; then
+            echo "Found ZeroTier IPs: $ZEROTIER_IPS"
+        fi
+    fi
+
+    # Also check for common ZeroTier subnet ranges
+    ZT_SUBNETS="10.147.0.0/16 10.242.0.0/16 10.243.0.0/16 10.244.0.0/16"
+    
+    # Build ignoreip list
+    IGNORE_IPS="127.0.0.1/8 ::1"
+    if [ -n "$ZEROTIER_IPS" ]; then
+        for ip in $ZEROTIER_IPS; do
+            IGNORE_IPS="$IGNORE_IPS $ip"
+        done
+    fi
+    # Add common ZeroTier subnets
+    IGNORE_IPS="$IGNORE_IPS $ZT_SUBNETS"
+
+    echo "Fail2ban will ignore these IPs/subnets: $IGNORE_IPS"
+
     # Create Fail2ban jail configuration for Nginx
     sudo tee /etc/fail2ban/jail.local > /dev/null <<EOF
 [DEFAULT]
 # Ban hosts for one hour:
 bantime = 3600
+
+# Whitelist ZeroTier and localhost IPs
+# These IPs will never be banned
+ignoreip = $IGNORE_IPS
 
 # Override /etc/fail2ban/jail.d/00-firewalld.conf:
 banaction = iptables-multiport
