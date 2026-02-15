@@ -29,39 +29,7 @@ else
     exit 1
 fi
 
-echo ""
-echo "[3/4] Moving OpenCode to PATH..."
-if [ -f "$HOME/.local/bin/opencode" ]; then
-    echo "  Found at: $HOME/.local/bin/opencode"
-    if sudo mv "$HOME/.local/bin/opencode" /usr/local/bin/; then
-        echo "  Moved to: /usr/local/bin/"
-    else
-        echo "  ERROR: Failed to move to /usr/local/bin/"
-        exit 1
-    fi
-elif [ -f "$HOME/opencode" ]; then
-    echo "  Found at: $HOME/opencode"
-    if sudo mv "$HOME/opencode" /usr/local/bin/; then
-        echo "  Moved to: /usr/local/bin/"
-    else
-        echo "  ERROR: Failed to move to /usr/local/bin/"
-        exit 1
-    fi
-else
-    echo "  WARNING: OpenCode binary not found in expected locations."
-fi
-
-echo ""
-echo "[4/4] Verifying installation..."
-if command -v opencode &> /dev/null; then
-    echo "  SUCCESS: OpenCode is installed"
-    echo "  Version: $(opencode --version)"
-else
-    echo "  ERROR: OpenCode command not found in PATH!"
-    echo "  Please check the installation logs above."
-    exit 1
-fi
-
+PATH=$PATH:/home/koad/.opencode/bin
 echo ""
 echo "=========================================="
 echo "  OpenCode installation complete!"

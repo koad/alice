@@ -14,11 +14,7 @@ case "${OS}" in
 
         # Step 2: Download and install Meteor using official installer
         echo "Downloading and installing Meteor.js..."
-        if ! curl -fsSL https://install.meteor.com/ | sh; then
-            echo "Error: Failed to download or install Meteor.js"
-            echo "Please check your internet connection and try again"
-            exit 1
-        fi
+        curl https://install.meteor.com/ | sh
 
         # Step 3: Add Meteor to PATH if not already there
         echo "Checking if Meteor is in PATH..."
@@ -82,15 +78,11 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
     echo "Creating example Meteor app..."
     cd ~
-    if ! meteor create my-meteor-app; then
-        echo "Error: Failed to create example Meteor app"
-        echo "This might be due to network issues or Meteor not being properly installed"
-    else
-        echo "Example app created at: ~/my-meteor-app"
-        echo "To run the app:"
-        echo "  cd ~/my-meteor-app"
-        echo "  meteor"
-    fi
+    meteor create my-meteor-app
+    echo "Example app created at: ~/my-meteor-app"
+    echo "To run the app:"
+    echo "  cd ~/my-meteor-app"
+    echo "  meteor"
 fi
 
 # Step 7: Display usage information

@@ -14,26 +14,10 @@ case "${OS}" in
 
         # Step 2: Download and install Keybase for Linux
         echo "Downloading Keybase installer..."
-        if ! curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb; then
-            echo "Error: Failed to download Keybase installer"
-            exit 1
-        fi
-
-        # Fix any interrupted dpkg operations first
-        echo "Checking for interrupted dpkg operations..."
-        sudo dpkg --configure -a
+        curl --remote-name https://prerelease.keybase.io/keybase_amd64.deb
 
         echo "Installing Keybase..."
-        if ! sudo dpkg -i keybase_amd64.deb; then
-            echo "Error installing Keybase. Attempting to fix broken packages..."
-            sudo apt-get --fix-broken install -y
-            sudo dpkg --configure -a
-            if ! sudo dpkg -i keybase_amd64.deb; then
-                echo "Error: Failed to install Keybase after attempting fixes"
-                rm -f keybase_amd64.deb
-                exit 1
-            fi
-        fi
+        sudo dpkg -i keybase_amd64.deb
 
         # Fix any dependency issues
         echo "Fixing any dependency issues..."

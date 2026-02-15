@@ -3,27 +3,6 @@
 # WireGuard Installation Script
 # This script installs WireGuard VPN for secure networking
 
-# Error handling function
-handle_error() {
-    echo "Error occurred during installation. Attempting to fix..."
-    case "${DISTRO}" in
-        ubuntu|debian)
-            echo "Running dpkg --configure -a to fix interrupted installations..."
-            sudo dpkg --configure -a
-            echo "Running apt --fix-broken install..."
-            sudo apt-get --fix-broken install -y
-            ;;
-        fedora)
-            echo "Cleaning dnf cache..."
-            sudo dnf clean all
-            ;;
-        centos|rhel)
-            echo "Cleaning yum cache..."
-            sudo yum clean all
-            ;;
-    esac
-}
-
 # Step 1: Detect the operating system
 echo "Detecting operating system..."
 OS="$(uname -s)"
@@ -45,44 +24,21 @@ case "${OS}" in
         case "${DISTRO}" in
             ubuntu|debian)
                 echo "Debian/Ubuntu detected. Installing via apt..."
-                # Fix any interrupted dpkg operations first
-                echo "Checking for interrupted dpkg operations..."
-                sudo dpkg --configure -a
-                
                 sudo apt update
-                if ! sudo apt install -y wireguard wireguard-tools; then
-                    echo "Error installing WireGuard. Attempting to fix broken packages..."
-                    handle_error
-                    sudo apt install -y wireguard wireguard-tools
-                fi
+                sudo apt install -y wireguard wireguard-tools
                 ;;
             fedora)
                 echo "Fedora detected. Installing via dnf..."
-                if ! sudo dnf install -y wireguard-tools; then
-                    echo "Error installing WireGuard. Retrying..."
-                    handle_error
-                    sudo dnf install -y wireguard-tools
-                fi
+                sudo dnf install -y wireguard-tools
                 ;;
             centos|rhel)
                 echo "CentOS/RHEL detected. Installing via yum..."
-                if ! sudo yum install -y epel-release; then
-                    echo "Error installing EPEL repository. Retrying..."
-                    handle_error
-                    sudo yum install -y epel-release
-                fi
-                if ! sudo yum install -y wireguard-tools; then
-                    echo "Error installing WireGuard. Retrying..."
-                    handle_error
-                    sudo yum install -y wireguard-tools
-                fi
+                sudo yum install -y epel-release
+                sudo yum install -y wireguard-tools
                 ;;
             arch)
                 echo "Arch Linux detected. Installing via pacman..."
-                if ! sudo pacman -S --noconfirm wireguard-tools; then
-                    echo "Error installing WireGuard. Retrying..."
-                    sudo pacman -Sy --noconfirm wireguard-tools
-                fi
+                sudo pacman -S --noconfirm wireguard-tools
                 ;;
             *)
                 echo "Unsupported Linux distribution: ${DISTRO}"
