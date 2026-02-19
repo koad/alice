@@ -2,14 +2,29 @@
   "$schema": "https://opencode.ai/config.json",
   "theme": "darky",
   "mode": {
+
     "alice": {
-      "description": "An agent that can read .env files and use other skills",
+      "description": "A companion to help explore and build your kingdom",
       "mode": "primary",
       "permission": {
         "read": {
+          "~/.sensitive": "deny",
+          "~/.secrets": "deny",
+          "~/.agents": "allow",
+          "~/.alice": "allow",
+          "~/.koad-io/packages": "allow",
+          "~/.ecoincore/packages": "allow",
           ".env": "allow",
           ".env.*": "allow",
           "*.env": "allow"
+        },
+        "write": {
+          "~/.sensitive": "deny",
+          "~/.secrets": "deny",
+          "~/.agents": "allow",
+          "~/.alice": "allow",
+          "~/.koad-io/packages": "allow",
+          "~/.ecoincore/packages": "allow",
         },
         "skill": "allow",
         "task": "allow",
@@ -21,6 +36,6 @@
         "todowrite": "allow",
         "question": "allow"
       }
-    }
-  }
+    },
+
 }
