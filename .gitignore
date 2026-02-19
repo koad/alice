@@ -1,1 +1,8 @@
+local
+archive
+node_modules
+registries
+sites
+ssl
 .env
+*.lock
