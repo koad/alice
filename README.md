@@ -4,31 +4,37 @@ Welcome to the example installation repository for Alice! This repository serves
 
 ## Repository Structure
 
-The example installation repository, named "alice" in this case, follows a structured organization to help you easily navigate and understand its contents. Here's an overview of the repository structure:
+The example installation repository, named "alice" in this case, follows a structured organization:
 
-- `commands/`: This directory contains a collection of example commands that demonstrate the capabilities and flexibility of koad:io. These commands are provided as samples to help you understand how to create your own commands. Feel free to explore, modify, or expand upon these examples to suit your specific needs.
-
-- `README.md`: This file provides an overview of the example installation repository and explains the purpose and structure of its contents.
+- `commands/`: Example commands (install nodejs, meteor, etc.)
+- `skills/`: opencode skills for AI interactions
+- `memories/`: Context memories for persistence
+- `skeletons/`: Custom project templates
+- `id/`: GPG and SSH keys
+- `README.md`: This file
 
 ## Getting Started
 
-To make use of this example installation repository, you can follow these steps:
-
-1. Clone the repository: Start by cloning this repository to your local machine. You can use the following command:
+1. Clone the repository:
 ```shell
 git clone https://github.com/koad/alice.git ~/.alice
 ```
 
-2. Initialize Alice as an existing koad:io entity.  koad-io will assume Alice exists in the `~/.alice` folder.
+2. Initialize Alice:
 ```shell
 koad-io init alice
 ```
 
-3. Use Alice to setup your new computer.
+3. Launch Alice (opens in opencode interface):
+```shell
+alice
+```
+
+4. Use Alice's install commands:
 ```bash
 alice install essentials
 alice install keybase
-alice install zeroteir
+alice install zerotier
 alice install starship
 alice install browsers
 alice install nodejs
@@ -37,11 +43,28 @@ alice install sublime
 alice install codium
 ```
 
+## Interacting with Alice
 
-## Contributing
+### Bash Interface
+```bash
+alice <command> <args>
+```
 
-Contributions to this example installation repository are welcome! If you have improvements, additional examples, or suggestions, feel free to submit a pull request or open an issue on the repository's GitHub page. Your contributions can help enhance the repository and provide even more valuable resources for other users.
+### Opencode Interface (AI Chat)
+Just run `alice` with no arguments! This launches opencode with Alice as your AI agent. Talk to her in English, she has skills to help you learn koad:io.
 
-## Conclusion
+## Alice's Skills
 
-The example installation repository for Alice serves as a guide and reference for setting up and organizing your own koad:io installation. By exploring the provided commands, modules, and packages, you can gain insights into creating your custom commands, extending functionalities, and incorporating user interface elements. Use this repository as a starting
+- **quest** — Gamified learning quests
+- **explore** — Explore koad:io ecosystem
+- **commit** — Git commit workflow
+- **learn** — Create new skills
+
+## Creating Your Own Entity
+
+When you're ready to create your own entity:
+```bash
+koad-io gestate yourname
+```
+
+This creates a new entity with its own commands, keys, and identity.
