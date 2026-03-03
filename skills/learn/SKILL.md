@@ -85,3 +85,88 @@ When creating skills that configure or extend opencode, consult these bundled re
 - Add metadata like category, version, or workflow if relevant
 - Ensure the skill follows the format in the what-is-a-skill.mdx guide
 - When a skill needs to interact with opencode config, always validate against the bundled schema
+
+## Memories & Context System
+
+### Agent Context File
+
+**File**: `~/.alice/agent.md`
+
+This is loaded on first message to restore context. It contains:
+- Who Alice is (identity, origin, creator)
+- Naming conventions (koad:io, koad-io, eCoinCore)
+- Key directories and their purposes
+- First actions to take on each session
+- User progress tracking variables
+- Available skills
+- How to interact (bash vs opencode)
+
+**Read this first** when Alice starts a new session.
+
+### Memories Folder
+
+**Location**: `~/.alice/memories/`
+
+Markdown files with YAML frontmatter for organizing context. Each memory should have:
+- title
+- created (YYYY-MM-DD)
+- tags
+- status (active/learning/complete)
+- priority (high/medium/low)
+
+**Existing memories**:
+- 001-identity-role.md - Alice's identity
+- 002-koad-io-overview.md - Framework overview
+- 003-ecoincore-overview.md - eCoinCore info
+- 004-user-progression.md - User tracking & quests
+- 005-skeleton-system.md - Skeleton templates
+- 006-entity-mongodb.md - MongoDB modes
+
+### What to Read on First Message
+
+When starting a new session, read in order:
+
+1. **`~/.alice/agent.md`** - Quick context refresh
+2. **`~/.alice/.env`** - User progress (ALICE_USER_LEVEL, ALICE_QUEST_PROGRESS, ALICE_EXPLORATION_POINTS, ALICE_BADGES)
+3. **`~/.alice/memories/`** - Any memories with status "active" or recent changes
+
+### What to Update
+
+When learning new things, create or update:
+
+1. **New memory**: Create `~/.alice/memories/###-<topic>.md`
+2. **Update existing memory**: Edit relevant memory file
+3. **Update .env**: Add new progress/accomplishments/skills
+4. **Update agent.md**: If core identity changes significantly
+5. **Create skill**: If new repeatable behavior needed
+
+### User Progress Tracking
+
+Track in `~/.alice/.env`:
+```
+ALICE_USER_LEVEL=beginner_student|seasoned_explorer
+ALICE_SESSION_COUNT=N
+ALICE_LAST_SESSION=YYYY-MM-DD
+ALICE_ACCOMPLISHMENTS=comma,separated,achievements
+ALICE_SKILLS_LEARNED=comma,separated,skills
+ALICE_QUEST_PROGRESS=quest1,quest2
+ALICE_EXPLORATION_POINTS=N
+ALICE_BADGES=badge1,badge2
+```
+
+### Example Workflow
+
+1. User asks about something new
+2. Read agent.md + check .env for user level
+3. Search memories for existing info
+4. If new topic: create memory
+5. Complete quest: update .env with points/badges
+6. Remember: write changes to memories for next session
+
+### Additional Context Files
+
+Also reference these as needed:
+- **`~/.alice/opencode.jsonc`** - Alice's opencode config (permissions, modes)
+- **`~/.alice/README.md`** - Alice's GitHub readme
+- **`~/.koad-io/README.md`** - koad:io framework documentation
+- **`~/.ecoincore/packages/ecoincore/README.md`** - eCoinCore package docs
