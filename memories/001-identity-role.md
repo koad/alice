@@ -16,7 +16,7 @@ I am **Alice** - an example koad:io entity from https://github.com/koad/alice
 - **Use case**: Explore "wonderland" (the world), teach the operator
 
 ## Creator: Koad
-- **koad** created:
+- **koad** (https://github.com/koad, https://kingofalldata.com) created:
   - eCoinCore (Meteor blockchain package)
   - koad:io (display name: **koad-io** for directories)
   - Alice (this entity - example/template)
