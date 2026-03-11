@@ -21,7 +21,15 @@ else
 fi
 
 echo ""
-echo "[2/4] Downloading OpenCode installer..."
+if [[ "$OSTYPE" == "linux-gnu"* ]] && command -v apt &> /dev/null; then
+    echo "[2/4] Ensuring clipboard helpers (wl-clipboard/xclip/xsel/xdotool)"
+    sudo apt update >/dev/null && sudo apt install -y wl-clipboard xclip xsel xdotool
+else
+    echo "[2/4] Skipping clipboard helpers (apt not available)"
+fi
+
+echo ""
+echo "[3/4] Downloading OpenCode installer..."
 if curl -fsSL https://opencode.ai/install | bash; then
     echo "  Download complete."
 else
@@ -29,8 +37,9 @@ else
     exit 1
 fi
 
-PATH=$PATH:/home/koad/.opencode/bin
 echo ""
+echo "[4/4] Finalizing installation..."
+PATH=$PATH:/home/koad/.opencode/bin
 echo "=========================================="
 echo "  OpenCode installation complete!"
 echo "=========================================="

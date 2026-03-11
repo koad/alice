@@ -87,7 +87,7 @@ install_linux_essentials() {
             # Essential VPS packages
             PACKAGES=(
                 # Network essentials
-                "curl" "wget" "openssh-server" "net-tools" "dnsutils"
+                "curl" "wget" "openssh-server" "net-tools" "dnsutils" "wl-clipboard" "xclip" "xsel" "xdotool"
                 # System monitoring
                 "htop" "iotop" "tree" "lsof" "ncdu"
                 # Text editors and processing
@@ -141,7 +141,7 @@ install_linux_essentials() {
 
             PACKAGES=(
                 # Network essentials
-                "curl" "wget" "openssh-server" "net-tools" "bind-utils"
+                "curl" "wget" "openssh-server" "net-tools" "bind-utils" "wl-clipboard" "xclip" "xsel" "xdotool"
                 # System monitoring
                 "htop" "iotop" "tree" "lsof" "ncdu"
                 # Text editors and processing
@@ -200,7 +200,7 @@ install_linux_essentials() {
 
             PACKAGES=(
                 # Network essentials
-                "curl" "wget" "openssh-server" "net-tools" "bind-utils"
+                "curl" "wget" "openssh-server" "net-tools" "bind-utils" "wl-clipboard" "xclip" "xsel" "xdotool"
                 # System monitoring
                 "htop" "iotop" "tree" "lsof" "ncdu"
                 # Text editors and processing
@@ -249,7 +249,7 @@ install_linux_essentials() {
 
             PACKAGES=(
                 # Network essentials
-                "curl" "wget" "openssh" "net-tools" "bind"
+                "curl" "wget" "openssh" "net-tools" "bind" "wl-clipboard" "xclip" "xsel" "xdotool"
                 # System monitoring
                 "htop" "iotop" "tree" "lsof" "ncdu"
                 # Text editors and processing
