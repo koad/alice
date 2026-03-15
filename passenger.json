@@ -1,0 +1,17 @@
+{
+  "handle": "alice",
+  "name": "Alice",
+  "avatar": "avatar.png",
+  "outfit": {
+    "hue": 12,
+    "saturation": 6,
+    "brightness": 15
+  },
+  "buttons": [
+    { "key": "cross", "label": "Home", "action": "open.pwa", "target": "imkffakkokdepekkloggmhfpfmmghpod" },
+    { "key": "coffin-cross", "label": "File", "action": "open.with.default.app", "target": "web+alice://projects/list" },
+    { "key": "church", "label": "Calendar", "action": "open.pwa.with.brave", "target": "homgmmdehinjhobmnofiiggcmkoifden" },
+    { "key": "book-bible", "label": "Phone", "action": "open.with.default.app", "target": "web+alice://dashboard/telephone/numbers" },
+    { "key": "hands-praying", "label": "Cogs", "action": "open.with.default.app", "target": "web+alice://dashboard/domains" }
+  ]
+}
