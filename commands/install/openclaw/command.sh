@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-# Moltbot (formerly Clawdbot) Installation Script
-# This script installs Moltbot - an open-source personal AI assistant
+# OpenClaw Installation Script
+# This script installs OpenClaw - an open-source personal AI assistant (formerly Moltbot/Clawdbot)
 
 set -e
 
 echo "=========================================="
-echo "  Moltbot Installation"
+echo "  OpenClaw Installation"
 echo "=========================================="
 echo ""
 
@@ -45,8 +45,8 @@ if command -v clawd &> /dev/null; then
 fi
 
 echo ""
-echo "[3/7] Running Moltbot installer..."
-if curl -fsSL https://molt.bot/install.sh | bash; then
+echo "[3/7] Running OpenClaw installer..."
+if curl -fsSL https://openclaw.ai/install.sh | bash; then
     echo "  Installer script completed."
 else
     echo "  WARNING: Official installer may have failed, trying npm..."
@@ -89,7 +89,7 @@ fi
 echo ""
 echo "[7/7] Final verification..."
 if command -v clawd &> /dev/null; then
-    echo "  SUCCESS: Moltbot is ready!"
+    echo "  SUCCESS: OpenClaw is ready!"
     echo "  Command: clawd"
 else
     echo "  ERROR: Installation failed - clawd command not found!"
@@ -99,7 +99,7 @@ fi
 
 echo ""
 echo "=========================================="
-echo "  Moltbot installation complete!"
+echo "  OpenClaw installation complete!"
 echo "=========================================="
 echo ""
 echo "Next steps:"
