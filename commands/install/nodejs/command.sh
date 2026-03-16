@@ -39,12 +39,12 @@ echo "  Default set to: $(nvm alias default)"
 
 # Step 5: Use LTS
 echo ""
-echo "[4/7] Switching to Node 24..."
+echo "[4/7] Switching to LTS..."
 nvm use default
 
 # Step 6: Install package managers and tools
 echo ""
-echo "[5/7] Installing npm, yarn, and bun..."
+echo "[5/7] Installing npm, yarn, pnpm, and bun..."
 
 # npm is installed with Node.js, just verify
 if command -v npm &> /dev/null; then
@@ -59,6 +59,13 @@ if npm install -g yarn 2>/dev/null; then
     echo "  yarn: $(yarn --version)"
 else
     echo "  WARNING: yarn install failed"
+fi
+
+# Install pnpm
+if npm install -g pnpm 2>/dev/null; then
+    echo "  pnpm: $(pnpm --version)"
+else
+    echo "  WARNING: pnpm install failed"
 fi
 
 # Install bun
@@ -114,6 +121,7 @@ echo "[7/7] Verifying installations..."
 echo "  Node.js: $(node --version)"
 echo "  npm: $(npm --version)"
 echo "  yarn: $(yarn --version 2>/dev/null || echo 'not installed')"
+echo "  pnpm: $(pnpm --version 2>/dev/null || echo 'not installed')"
 echo "  bun: $(bun --version 2>/dev/null || echo 'not installed')"
 
 echo ""
@@ -125,6 +133,7 @@ echo "Summary:"
 echo "  - Node.js: $(node --version) (default)"
 echo "  - npm: $(npm --version)"
 echo "  - yarn: $(yarn --version 2>/dev/null || echo 'installed')"
+echo "  - pnpm: $(pnpm --version 2>/dev/null || echo 'installed')"
 echo "  - bun: $(bun --version 2>/dev/null || echo 'installed')"
 echo ""
 echo "To use in current session, run:"
