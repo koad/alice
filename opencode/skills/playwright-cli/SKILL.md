@@ -311,6 +311,44 @@ playwright-cli tracing-stop
 # playwright-cli close  # Uncomment when done
 ```
 
+## ⚠️ Important Limitations
+
+### Native File Pickers & Dialogs in Headed Mode
+
+When using `--headed` mode, **native OS dialogs (file pickers, save dialogs, print dialogs) do NOT appear in the browser window**. They appear as separate OS-level windows that:
+
+1. **Block automation** - The browser hangs waiting for user input
+2. **Are not visible** - You cannot see them in the headed browser display
+3. **Cannot be interacted with** via standard playwright-cli commands
+
+**Symptoms:**
+- Clicking an upload button appears to do nothing (the file picker is actually opening but invisible)
+- The `snapshot` shows "Modal state: [File chooser]: can be handled by upload"
+- Console shows no JavaScript errors - the click IS working
+
+**Workarounds:**
+
+1. **Use `upload` command** - After clicking the button, use the `upload` command to programmatically set files:
+   ```bash
+   playwright-cli click e37  # Click upload button
+   playwright-cli upload /path/to/file.png  # Upload the file
+   ```
+
+2. **Test in real browser** - For features involving file pickers, always verify manually in a real browser
+
+3. **Use headless mode for automated testing** - File choosers work programmatically in headless mode
+
+4. **Check console logs** - The functionality may actually be working even if you can't see the dialog:
+   ```bash
+   playwright-cli console
+   ```
+
+### Other Known Limitations
+
+- **Print dialogs**: Similar issue - native print dialogs don't render in headed browser
+- **window.showOpenFilePicker()**: Uses native file picker which has the same limitation
+- **Some authentication flows**: OAuth popups may not render properly
+
 ## Specific tasks
 
 * **Request mocking** [references/request-mocking.md](references/request-mocking.md)
