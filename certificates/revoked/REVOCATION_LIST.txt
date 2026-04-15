@@ -1,4 +1,0 @@
-# Alice Certificate Revocation List
-# Format: <certificate-hash> <revocation-date> <reason>
-# One entry per line
-# Empty = no certificates revoked
