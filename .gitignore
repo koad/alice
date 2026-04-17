@@ -1,8 +1,24 @@
-local
-archive
-node_modules
-registries
-sites
-ssl
-.env
-*.lock
+# Runtime artifacts (regenerate on their own)
+.local/
+node_modules/
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.tmp/
+dist/
+
+# Entity GPG keyring — private keys, never commit
+keyring/
+
+# Flight plans — ephemeral dispatch artifacts (durable record is commit trailer)
+flight-plans/
+
+# Claude Code harness artifacts (regenerated per session)
+.claude.json
+.claude/
+mcp-needs-auth-cache.json
+
+# Runtime state
+var/

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Browser Installation Script
 # This script installs multiple browsers: Google Chrome, Brave, Chromium, Vivaldi, and Opera

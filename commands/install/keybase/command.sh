@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Keybase Installation Script
 # This script installs Keybase for secure messaging, file sharing, and identity verification

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # GitHub CLI (gh) Installation Script
 # This script installs GitHub CLI - the official GitHub command line tool

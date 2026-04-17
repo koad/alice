@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # NVM (Node Version Manager) Installation Script
 # This script installs NVM, Node.js LTS, npm, yarn, and bun

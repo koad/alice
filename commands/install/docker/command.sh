@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Docker Installation Script
 # This script installs Docker and sets up the docker group for non-root access

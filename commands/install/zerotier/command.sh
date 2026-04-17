@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # ZeroTier Installation Script
 # This script installs ZeroTier One for creating secure virtual networks

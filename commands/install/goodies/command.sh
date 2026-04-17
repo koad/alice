@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Goodies Installation Script
 # This script installs various useful utilities and tools for development and system administration

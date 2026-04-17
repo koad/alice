@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Sublime Text and Sublime Merge Installation Script
 # This script adds Sublime Text repositories and installs both Sublime Text and Sublime Merge

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # WireGuard Installation Script
 # This script installs WireGuard VPN for secure networking

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Zed Editor Installation Script
 # This script installs Zed - a modern, fast code editor

@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Mongosh (MongoDB Shell) Installation Script
 # This script installs mongosh following the official MongoDB procedure

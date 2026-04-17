@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Claude Code Installation Script
 # This script installs Claude Code - Anthropic's AI coding assistant

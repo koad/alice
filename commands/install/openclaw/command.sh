@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # OpenClaw Installation Script
 # This script installs OpenClaw - an open-source personal AI assistant (formerly Moltbot/Clawdbot)

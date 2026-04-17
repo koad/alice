@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Homebrew Installation Script
 # This script installs Homebrew - the missing package manager for macOS and Linux

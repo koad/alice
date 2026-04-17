@@ -1,4 +1,5 @@
 #!/bin/bash
+# SPDX-License-Identifier: 0BSD
 
 #==============================================================================
 # Remote Folder Transfer Utility

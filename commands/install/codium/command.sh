@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # VSCodium Installation Script
 # This script adds VSCodium repositories and installs VSCodium (open-source VS Code)

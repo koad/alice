@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Meteor.js Installation Script
 # This script installs Meteor.js for full-stack JavaScript development

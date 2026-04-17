@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# SPDX-License-Identifier: 0BSD
 
 # Nginx Installation Script with Let's Encrypt
 # This script installs Nginx web server with Let's Encrypt SSL certificate support
