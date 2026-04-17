@@ -1,3 +1,5 @@
+<!-- SPDX-License-Identifier: CC0-1.0 -->
+
 # example koad:io installation repository: Alice
 
 Welcome to the example installation repository for Alice! This repository serves as a demonstration and reference for setting up and organizing your own koad:io installation. It showcases various commands, configurations, and best practices that can inspire and guide you in creating your custom commands and modules within your koad:io environment.

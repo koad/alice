@@ -1,6 +1,7 @@
 {
   "handle": "alice",
   "name": "Alice",
+  "role": "teacher",
   "avatar": "avatar.png",
   "outfit": {
     "h": 21,
@@ -36,6 +37,22 @@
       "label": "Cogs",
       "action": "open.with.default.app",
       "target": "web+alice://dashboard/domains"
+    }
+  ],
+  "dispatch": {
+    "color": "pink",
+    "model": "sonnet"
+  },
+  "skills": [
+    {
+      "name": "learner-context",
+      "hook": "hooks/learner-context.sh",
+      "description": "Load and inject learner context at session start"
+    },
+    {
+      "name": "save-learner",
+      "hook": "hooks/save-learner.sh",
+      "description": "Persist learner progress record after session"
     }
   ]
 }

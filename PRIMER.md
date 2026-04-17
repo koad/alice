@@ -12,8 +12,9 @@ Alice is the public-facing ambassador and onboarding guide for the koad:io ecosy
 - Alice PWA: live and accessible at kingofalldata.com
 - 13-level onboarding curriculum: authored by Chiron, delivered by Alice
 - Phase 2A UI: Muse's design brief implemented by Vulcan
-- Curriculum content in `curriculum/12-levels.md`
-- Identity memories: 9 context files in `memories/`
+- Curriculum delivery notes: `~/.alice/memories/012-curriculum-delivery.md`
+- Chiron's curriculum registry: `~/.chiron/REGISTRY.md`
+- Identity memories: context files in `memories/`
 - Graduation certificate protocol: designed (Vesta spec + Muse design)
 
 ### What Alice Does
@@ -47,9 +48,10 @@ PR open: koad/kingofalldata-dot-com#1 (blog infrastructure — blocked on koad m
 | File | Purpose |
 |------|---------|
 | `README.md` | Entity overview (originally framework example repo) |
-| `curriculum/12-levels.md` | The 12-level sovereignty path delivered by Alice |
+| `memories/012-curriculum-delivery.md` | Canonical delivery guide — level-by-level teaching notes |
 | `memories/001-identity-role.md` | Alice's identity and role context |
 | `memories/004-user-progression.md` | Progression model context |
 | `commands/` | Alice's custom commands |
 | `certificates/` | Graduation certificate storage |
 | `reviews/` | Curriculum review notes |
+| `~/.chiron/REGISTRY.md` | Chiron's canonical curriculum registry (source of truth for levels) |
