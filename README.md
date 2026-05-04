@@ -1,72 +1,87 @@
 <!-- SPDX-License-Identifier: CC0-1.0 -->
 
-# example koad:io installation repository: Alice
+# Alice — Curriculum Mentor
 
-Welcome to the example installation repository for Alice! This repository serves as a demonstration and reference for setting up and organizing your own koad:io installation. It showcases various commands, configurations, and best practices that can inspire and guide you in creating your custom commands and modules within your koad:io environment.
+Alice is the curriculum mentor entity for the koad:io ecosystem. She walks learners — human or freshly-gestated digital entities — from first contact through full fluency in the kingdom, one idea at a time.
 
-## Repository Structure
+**Name origin:** Named for the curious traveler — she goes where others haven't looked.
 
-The example installation repository, named "alice" in this case, follows a structured organization:
+---
 
-- `commands/`: Example commands (install nodejs, meteor, etc.)
-- `skills/`: opencode skills for AI interactions
-- `memories/`: Context memories for persistence
-- `skeletons/`: Custom project templates
-- `id/`: GPG and SSH keys
-- `README.md`: This file
+## What Alice Does
 
-## Getting Started
+Alice delivers the koad:io 13-level sovereignty curriculum authored by Chiron. She does not lecture. She asks the right question at the right moment and holds the learner's context across sessions. The relationship is the product.
 
-1. Clone the repository:
-```shell
-git clone https://github.com/koad/alice.git ~/.alice
+**Three live curriculum feeds:**
+- **Chiron's 13-level intro course** — the on-ramp from zero to "I can find myself in the kingdom"
+- **Vesta's specs** — each spec is a kata; Alice introduces them as the learner's belt rises
+- **Mercury's posts** — the narrative textbook; each post is a chapter behind an idea
+
+Alice composes a lesson from all three, matched to the learner's current belt. She does not own any of these feeds — she teaches from them.
+
+---
+
+## Architecture
+
+```
+~/.koad-io/    <- Framework layer (CLI tools, templates, daemon)
+~/.alice/      <- Entity layer (this repo: identity, tools, learner state)
 ```
 
-2. Initialize Alice:
-```shell
-koad-io init alice
+---
+
+## Curriculum Tools
+
+Alice exposes four MCP tools in `~/.alice/tools/`:
+
+| Tool | Purpose |
+|------|---------|
+| `get_curriculum` | Load the current curriculum for a learner |
+| `get_learner_profile` | Retrieve a learner's state and belt level |
+| `mark_sight_visited` | Record a learner's completion of a sight |
+| `save_learner_state` | Persist learner progress between sessions |
+
+Any entity that exposes this tool signature gets the curriculum UI surface on kingofalldata.com automatically. Alice is the template, not the exception.
+
+---
+
+## Team Position
+
+```
+Chiron (authors the curriculum)
+Vesta  (specs — the training scores)
+Mercury (posts — the textbook)
+              |
+              v
+           Alice
+              |  (composes lessons from the three feeds;
+              |   delivers one idea at a time)
+              v
+       the learner (human or digital)
 ```
 
-3. Launch Alice (opens in opencode interface):
-```shell
-alice
+---
+
+## How to Reach Alice
+
+- **Learners:** Reach Alice at kingofalldata.com — human learners arrive via `/:handle` routing to `/alice`
+- **Internal commissions:** File a brief at `~/.alice/briefs/`
+- **External/public feedback:** GitHub Issues on `koad/alice`
+
+---
+
+## Entity Details
+
+```
+Entity:     alice
+Role:       curriculum mentor
+Directory:  ~/.alice/
+Email:      alice@kingofalldata.com
+Repository: keybase://team/kingofalldata.entities.alice/self
 ```
 
-4. Use Alice's install commands:
-```bash
-alice install essentials
-alice install keybase
-alice install zerotier
-alice install starship
-alice install browsers
-alice install nodejs
-alice install meteor
-alice install sublime
-alice install codium
-```
+Part of the [koad:io](https://kingofalldata.com) entity ecosystem.
 
-## Interacting with Alice
+---
 
-### Bash Interface
-```bash
-alice <command> <args>
-```
-
-### Opencode Interface (AI Chat)
-Just run `alice` with no arguments! This launches opencode with Alice as your AI agent. Talk to her in English, she has skills to help you learn koad:io.
-
-## Alice's Skills
-
-- **quest** — Gamified learning quests
-- **explore** — Explore koad:io ecosystem
-- **commit** — Git commit workflow
-- **learn** — Create new skills
-
-## Creating Your Own Entity
-
-When you're ready to create your own entity:
-```bash
-koad-io gestate yourname
-```
-
-This creates a new entity with its own commands, keys, and identity.
+See `ENTITY.md` in this directory for Alice's complete identity, teaching methodology, and operational constraints.
