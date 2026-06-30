@@ -3,10 +3,6 @@
   "name": "Alice",
   "role": "teacher",
   "avatar": "avatar.png",
-  "outfit": {
-    "h": 21,
-    "s": 77
-  },
   "buttons": [
     {
       "key": "terminal",

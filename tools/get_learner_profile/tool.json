@@ -1,0 +1,17 @@
+{
+  "name": "get_learner_profile",
+  "description": "Retrieve a learner's saved profile and progress from the Alice message store. Returns all saved state records for the learner_id, sorted by timestamp. Use this at the start of a session to recall where the learner left off.",
+  "version": "1.0.0",
+  "invocation": "native",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "learner_id": {
+        "type": "string",
+        "description": "Learner identifier to look up.",
+        "maxLength": 64
+      }
+    },
+    "required": ["learner_id"]
+  }
+}

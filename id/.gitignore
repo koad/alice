@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# id/.gitignore for SPEC-175 shape
+# Private keys — never commit
+devices/*/leaf.private.asc
+devices/*/device.key
+# Keep public material
+!devices/*/leaf.public.asc
+!entity.public.asc
+!entity.fingerprint
+!migrated-at
+!archive/**
+# Keep this file
+!.gitignore

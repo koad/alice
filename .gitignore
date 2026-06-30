@@ -7,6 +7,7 @@ Thumbs.db
 *.swo
 *~
 .tmp/
+tmp/
 dist/
 
 # Entity GPG keyring — private keys, never commit
@@ -19,15 +20,81 @@ flight-plans/
 .claude.json
 .claude/
 mcp-needs-auth-cache.json
+archive/sessions/
 
 # Runtime state
 var/
 
-# Python bytecode
-__pycache__/
-*.pyc
-*.pyo
+# opencode TUI session state
+tui.json
+tooltips/
 
-# .io files — signed visual artifacts (VESTA-SPEC-136)
-# These are PNGs with embedded signed payloads; not part of the public storefront.
-*.io
+# Private keys — NEVER in git
+id/ed25519
+id/ecdsa
+id/rsa
+id/dsa
+
+# Credentials and secrets
+.credentials
+.env.local
+.env.*.local
+.env.secret*
+
+# Stale harness session dump — never commit
+.context
+
+# Agent logs — regenerable
+logs/
+
+# Runtime caches
+__pycache__/
+.pytest_cache/
+.venv/
+build/
+
+# ── Runtime artifacts — VESTA-SPEC-145 ──────────────────────────────────────
+
+# streams/ — trigger output, log files, event captures; fully regenerable
+streams/
+
+# qc/raw/ — auto-generated QC captures before deliberate review
+qc/raw/
+
+# .local/ — machine-local ephemera (socket files, PID files, temp state)
+.local/
+
+# node_modules/ (if present at entity root)
+node_modules/
+
+# SPEC-175: per-device private key material — never commit
+id/devices/*/leaf.private.asc
+id/devices/*/device.key
+
+# SPEC-175: entity.public.asc is committed (sovereign-certified public identity)
+!id/entity.public.asc
+!id/entity.fingerprint
+!id/migrated-at
+!id/archive/**
+
+
+# Pi harness + opencode/cline TUI artifacts
+.pi/
+auth.json
+bin/
+cache/
+config.toml
+history.jsonl
+installation_id
+log/
+logs_2.sqlite
+logs_2.sqlite-shm
+logs_2.sqlite-wal
+models_cache.json
+sessions/
+settings.json
+shell_snapshots/
+skills/
+state_5.sqlite
+version.json
+.personality_migration

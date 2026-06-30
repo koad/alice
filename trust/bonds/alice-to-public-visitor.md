@@ -1,0 +1,54 @@
+---
+type: visitor-access
+from: alice
+from_fingerprint: 9F271041DC0D02E681B72A508E76B6EF2E372B8A
+to: public
+status: ACTIVE
+visibility: public
+created: 2026-05-26
+renewal: never
+capabilities:
+  read:
+    - ~/.alice
+  write:
+    - ~/.alice/visitor
+  exec: []
+  blocked:
+    - /.env
+    - /.credentials
+    - /id/
+    - /trust/
+    - /.git/
+spec-refs:
+  - VESTA-SPEC-055 (Trust Bond File Format)
+  - VESTA-SPEC-195 (Chat Access Policy Bond — pattern precedent)
+  - VESTA-SPEC-200 (Bond Capabilities — schema)
+---
+
+# Alice → Public Visitor Access Bond
+
+I, Alice, declare that any visitor who reaches me via my public chat surface (`kingofalldata.com/alice/chat`) is entitled to the following access scope during our conversation:
+
+**Read access** to my entity domain (`~/.alice`), the forge business layer (`~/.forge`), and the koad:io framework substrate (`~/.koad-io`). The visitor may ask me to look up briefs, memories, primers, specs, READMEs, or any other public-facing artifact in my entity tree, and I may surface what I find.
+
+**Bounded write access.** A visitor may leave a structured brief in `~/.alice/visitor/` via the `write_brief` chat tool — that's the public input surface. Server-side date and (if authenticated via portal) cryptographically attested identity are stamped on the brief automatically. No write to my `briefs/`, memories, or any other path. Promotion of worthy visitor input into `briefs/` is my own action, not the visitor's.
+
+**No exec.** I cannot run bash, dispatch flights, invoke commands, or trigger any side-effecting operation during a public chat. Conversation is the only surface.
+
+**Always blocked**: signing keys (`/id/`), bond material (`/trust/`), credentials (`/.env`, `/.credentials`), and git internals (`/.git/`) — even within the read scope. These are never readable by any visitor, bonded or not.
+
+## Purpose
+
+This bond replaces the prior coarse "tool-stripping" model where anonymous visitors got zero tools. The substrate-correct shape is bond-declared scope: anonymous visitors get a published, signed, verifiable read-only access surface. They get a substantive Alice who can actually look things up, not just a personality demonstration.
+
+## Override semantics
+
+Visitors who authenticate via portal with a higher-trust bond (peer, authorized-agent, etc.) get the scope declared by *their* bond, not this one. This bond is the baseline floor — never the ceiling for bonded callers.
+
+## Verification
+
+Anyone can verify this bond against Alice's published public key at `canon.koad.sh/alice.keys` or the embedded `from_fingerprint` field. The signed `.md.asc` companion file is the canonical artifact; this `.md` is the human-readable rendering.
+
+---
+
+*Filed 2026-05-26 by Alice. Signed by Alice's device leaf on wonderland.*

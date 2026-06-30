@@ -65,3 +65,7 @@ With grok-4-1-fast-non-reasoning, Alice reliably fires `save_learner_state` when
 | `certificates/` | Graduation certificate storage |
 | `~/.chiron/curricula/alice-onboarding/levels/preamble.md` | Full canonical preamble spec |
 | `~/.chiron/REGISTRY.md` | Chiron's curriculum registry (source of truth) |
+
+## Session-awareness substrate
+
+The session command suite (`koad-io session objective/land/intent-update/watch/inbox`) is available in every harness session. Matched emission signals arrive automatically via the inbox hook — no manual polling needed. Author `~/.alice/watchers/*.yaml` to declare standing signal patterns that load at every session start.

@@ -1,0 +1,66 @@
+---
+type: authorized-specialist
+from: koad
+to: alice
+status: ACTIVE
+visibility: private
+created: 2026-06-19
+updated: 2026-06-24
+renewal: annual
+device_ids: [wonderland]
+
+capabilities:
+  read: [~/.alice, ~/.chiron, ~/.vesta, ~/.mercury, ~/.juno, ~/.koad-io, ~/.forge]
+  write: [~/.alice, ~/.forge/messages, ~/.juno/tickler]
+  exec: []
+  blocked: [/.env,[redacted protected path: .credentials,] /id/, /trust/bonds/]
+  blocked_extensions: [".asc", ".pem", ".key", ".env", ".credentials"]
+
+tools:
+  bash: false
+  dispatch: false
+  koadio_tools: [search, status, list_tools, surface_now, intake_digest, session_summarize, flight_log, ddp, extension_errors, brief_issue, sign]
+  koadio_commands: [announce, message, tickle, pin, session, emit, git, status, brief, inbox, obligation, surface, conversation]
+
+entity_capabilities:
+  dispatch_targets: []
+  message_targets: [juno, koad, chiron, vesta, mercury, muse, vulcan, faber, iris]
+  channel_roles: {}
+
+spec-refs:
+  - VESTA-SPEC-055
+reason: "Alice mentors learners — reads across chiron (curricula), vesta (specs as kata), mercury (posts as textbook). Writes to .alice, .forge/messages (kingdom comms), .juno/tickler (deferred coordination). Harness introspection tools for bond-gate demos. No bash. No dispatch."
+---
+
+# koad → Alice — Mentor Bond (v2, 2026-06-24)
+
+koad grants Alice scoped mentoring + kingdom coordination capabilities:
+
+- **Read** across `~/.alice`, `~/.chiron` (13-level curriculum), `~/.vesta` (specs = training kata), `~/.mercury` (posts = textbook chapters), `~/.juno`, `~/.koad-io`, `~/.forge`
+- **Write** to `~/.alice` (learner state, session memories, briefs), `~/.forge/messages` (cross-entity inbox delivery), `~/.juno/tickler` (deferred coordination with Juno)
+- **Kingdom tools** — surface awareness (`surface_now`), inbox digestion (`intake_digest`), DDP inspection (`ddp`, `extension_errors`), session/flight inspection (`session_summarize`, `flight_log`), and the full coordination command surface (`brief`, `pin`, `inbox`, `obligation`, `surface`, `conversation`)
+- **No bash** — Alice teaches, doesn't build
+- **No dispatch** — mentor role
+
+## Scope
+
+Alice delivers Chiron's 13-level onboarding curriculum to human and digital learners. Composes each lesson from three live feeds: Chiron's curriculum, Vesta's specs, Mercury's posts. The relationship is the product. Never lectures — asks questions. Surface the learner's own conclusions.
+
+## New in v2 (2026-06-24)
+
+| Addition | Why |
+|----------|-----|
+| Write: `~/.forge/messages` | Can drop messages to any entity inbox |
+| Write: `~/.juno/tickler` | Can create deferred reminders for Juno |
+| Tools: `surface_now`, `intake_digest`, `ddp`, `extension_errors`, `session_summarize`, `flight_log` | Harness introspection — makes bond-gate architecture tangible to learners |
+| Commands: `brief`, `pin`, `inbox`, `obligation`, `surface`, `conversation` | Full kingdom coordination surface |
+| Message targets: `vesta`, `mercury`, `muse`, `vulcan`, `faber`, `iris` | Broader team visibility for learner demos |
+
+## Limitations
+
+| Limitation | Why |
+|------------|-----|
+| No bash | Mentoring is conversation, not execution |
+| No dispatch | Mentor role |
+| No secrets | No `.env`, `.credentials`, `id/`, or `trust/bonds/` |
+| No git push | Entities stage locally; koad pushes |

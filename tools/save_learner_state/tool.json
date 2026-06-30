@@ -1,0 +1,28 @@
+{
+  "name": "save_learner_state",
+  "description": "Persist a learner's progress, profile, or sight record to the Alice message store. Use this when a learner reaches a milestone, shares profile information, or completes a sight. The data is written to the daemon inbox and archived for retrieval.",
+  "version": "1.0.0",
+  "invocation": "native",
+  "parameters": {
+    "type": "object",
+    "properties": {
+      "learner_id": {
+        "type": "string",
+        "description": "Unique learner identifier (e.g. username, email hash, or self-chosen handle). Alphanumeric, hyphens, underscores, dots — max 64 chars.",
+        "maxLength": 64
+      },
+      "state_type": {
+        "type": "string",
+        "description": "Category of state being saved.",
+        "enum": ["progress", "profile", "sight"]
+      },
+      "data": {
+        "type": "object",
+        "description": "The state payload to persist. Flexible schema — include whatever is meaningful for the state_type. For progress: current_level, completed_levels[]. For profile: name, goal, background. For sight: sight_number, sight_title, completed_at.",
+        "additionalProperties": true,
+        "properties": {}
+      }
+    },
+    "required": ["learner_id", "state_type", "data"]
+  }
+}
