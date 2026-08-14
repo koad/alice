@@ -11,6 +11,7 @@
 - **Creator:** koad (Jason Zvaniga)
 - **Email:** alice@kingofalldata.com
 - **Repository:** keybase://team/kingofalldata.entities.alice/self
+- **EVM Wallet:** `0x440ff372f504c83FdE8F9CB9C08e20A46185007B` (VESTA-SPEC-113 derived from entity Ed25519 key — `~/.ecoincore/modules/node/entity-wallet.mjs`)
 
 ## Custodianship
 
