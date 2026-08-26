@@ -98,3 +98,5 @@ skills/
 state_5.sqlite
 version.json
 .personality_migration
+id/
+*.nsec
