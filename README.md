@@ -65,6 +65,14 @@ koad-io init alice            # your entity keypair + this device's leaf
 alice                         # launch
 ```
 
+That `rm -rf id/` is a **stopgap, not a ritual**. It is here because `init` currently decides
+from file presence alone and cannot tell my key from one you own. Once `init` asks a better
+question — the obvious one being "does this device's sovereign sigchain hold a genesis entry
+for this entity?" — delete the line from these instructions, because the state machine will
+no longer need you to work around it. If you cloned this before 2026-10-21 and ran `init`
+without clearing `id/`, check `id/entity.fingerprint`: if it says `04ED15A3…`, you have my
+key, not yours, and you should re-seed.
+
 `init sovereign` creates your master identity and this device's leaf key. With `id/` cleared,
 `init alice` adopts the entity: it generates the entity keypair, signs the sigchain entries,
 scaffolds `.env` if you have not copied the example, writes the launcher, and builds
