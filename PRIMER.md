@@ -1,53 +1,63 @@
 # PRIMER: Alice
 
-Alice is the orientation path for anyone arriving at kingofalldata.com who doesn't yet know what they're looking at. She walks newcomers — human or digital — into the running system, one idea at a time, through a 13-level sovereignty curriculum authored by Chiron. Alice does not coordinate team work. She is the threshold: the place where a visitor becomes a participant.
+Alice is the orientation path for anyone arriving at koad:io who does not yet know what they
+are looking at. She walks newcomers — human or digital — into the running system, one idea at
+a time, through a sovereignty curriculum. Alice does not coordinate team work. She is the
+threshold: the place where a visitor becomes a participant.
 
 ---
 
 ## Current State
 
-**Live on kingofalldata.com.** Native tool calling wired end-to-end (2026-04-20).
+**Just initialized.** This is a template that has become an entity, or is about to. Read this
+file as the current state of whoever holds it, and rewrite it as soon as that stops being true.
 
-### What's Complete
-- **Alice PWA:** live and accessible at kingofalldata.com
-- **13-level onboarding curriculum:** authored by Chiron, delivered by Alice, referenced via `get_curriculum` tool
-- **Entity tools** (VESTA-SPEC-137 cascade, `~/.alice/tools/`):
-  - `save_learner_state` — persist profile/progress/sight to daemon inbox
-  - `get_learner_profile` — retrieve prior learner state
-  - `mark_sight_visited` — record level completion
-  - `get_curriculum` — load canonical level content
-- **Native tool calling** via xAI provider (grok-4-1-fast-non-reasoning default)
-- **learner_id passthrough:** client → harness `toolContext` → tool handlers
-- **tool-result SSE bridge:** server tool executions surface to client UI (alice.js dispatches to `toastSight`, `toastStudentCaptured`, etc.)
-- **Client decoupled:** `alice-memory.js` and all `<<SET>>` signal parsing removed; state lives server-side
-- **Phase 2A UI:** Muse's design brief implemented by Vulcan (commit 7d95c39)
-- **Curriculum files:** copied to `~/.alice/curriculum/alice-onboarding/levels/` (17 files including preamble, belt-0, level-00 through level-12)
+If `AGENTS.md` does not exist yet, the entity has not been adopted on this device:
 
-### What Alice Does
-- Greets new humans visiting kingofalldata.com
-- Guides through 12 levels of sovereignty: from first contact to running a sovereign entity
-- Captures learner profile via `save_learner_state` as the preamble rubric progresses
-- Delivers curriculum using `get_curriculum` for authoritative level content
-- Records sight completion with `mark_sight_visited`
-- Issues graduation certificates on curriculum completion
+```bash
+koad-io init sovereign      # sovereign identity for this person, on this machine
+koad-io init alice          # entity keypair + this device's leaf + AGENTS.md
+```
+
+If `AGENTS.md` exists, this entity is live here and the cascade is wired.
 
 ---
 
-## Active Work
+## What Alice Does
 
-- **Phase 2B planning** — curriculum levels beyond current implementation
-- **Graduation certificate issuance** — designed, implementation pending
-- **Model evaluation** — grok-4-fast may be too instruction-biased for preamble pacing; planned: A/B with Claude and grok-4 reasoning variants
+- Greets newcomers — humans arriving at a koad:io site, or freshly-gestated entities
+- Guides them through the sovereignty curriculum, one concept per exchange
+- Captures what a learner tells her, so the next session picks up where the last one stopped
+- Records level completion and, at the end, a graduation certificate
 
-PR open: koad/kingofalldata-dot-com#1 (blog infrastructure — blocked on koad merge)
+She asks before instructing. The learner does the thinking; Alice holds the context.
 
 ---
 
-## Known Limitation (2026-04-20)
+## What the Curriculum Is
 
-With grok-4-1-fast-non-reasoning, Alice reliably fires `save_learner_state` when a learner states durable facts, but tends to jump to Level-0 instruction ("make a folder on your Desktop...") before the articulation rubric is fully met. Three rounds of guidance tightening (verb ban, few-shot examples, explicit no-same-turn-transition rule) did not correct the behavior — the model has a strong instruction-mode prior that abstract + concrete guidance couldn't override.
+Thirteen levels, sequential, unlocked one at a time. Level 0 has no prerequisites.
 
-**Path forward:** test with reasoning-class models. Capture-is-working is a solid floor; pacing discipline is the open tuning problem.
+| # | Title | Core Concept |
+|---|-------|-------------|
+| 0 | The First File | `PRIMER.md` — one file, immediate payoff |
+| 1 | First Contact | Sovereignty = files on disk, not vendor lock-in |
+| 2 | What Is an Entity? | A directory with structure = identity |
+| 3 | Your Keys Are You | Cryptographic identity, GPG, SSH keys |
+| 4 | How Entities Trust Each Other | Trust bonds, signed authorization |
+| 5 | Commands and Hooks | How entities take action |
+| 6 | The Daemon and the Kingdom | Autonomous infrastructure |
+| 7 | Peer Rings | Connecting kingdoms, sponsorship |
+| 8 | The Entity Team | Roles, pipeline, succession |
+| 9 | Async Messaging | Transport-agnostic entity communication |
+| 10 | Context Bubbles | Portable knowledge |
+| 11 | Running an Entity | From concept to operation |
+| 12 | The Commitment | What you are joining, signed ceremony |
+
+Level content is delivered through the curriculum tool surface, not vendored into the entity:
+the canonical level text lives with whoever authors it, and Alice composes a lesson from it at
+the moment it is needed. (`curriculum/` — Alice's mirror of that content — is not part of this
+template.)
 
 ---
 
@@ -55,17 +65,18 @@ With grok-4-1-fast-non-reasoning, Alice reliably fires `save_learner_state` when
 
 | File | Purpose |
 |------|---------|
-| `ENTITY.md` | Identity, role, team position |
-| `memories/000-preamble-articulation.md` | Preamble mode behavioral anchors (the "stay in mode" rules) |
-| `memories/012-curriculum-delivery.md` | Level-by-level teaching notes |
-| `memories/014-returning-learner-posture.md` | Returning learner handling |
-| `memories/016-entity-tools-usage.md` | Tool usage guide (when/how to call each) |
-| `tools/` | Four entity tools (save_learner_state, get_learner_profile, mark_sight_visited, get_curriculum) |
-| `curriculum/alice-onboarding/levels/` | Canonical curriculum content (mirrored from Chiron) |
-| `certificates/` | Graduation certificate storage |
-| `~/.chiron/curricula/alice-onboarding/levels/preamble.md` | Full canonical preamble spec |
-| `~/.chiron/REGISTRY.md` | Chiron's curriculum registry (source of truth) |
+| `ENTITY.md` | Identity, role, teaching methodology, behavioral constraints |
+| `PRIMER.md` | This file — current state, for whoever arrives next |
+| `.env.example` | Documented environment variables; copy to `.env` if you need to override |
+| `passenger.json` | Entity manifest — handle, role, buttons, skills |
+| `~/.koad-io/` | The framework: commands, harness, daemon, helpers |
+| `~/.koad-io/commands/init/` | `init entity` / `init sovereign` — the state machine that built this |
+
+---
 
 ## Session-awareness substrate
 
-The session command suite (`koad-io session objective/land/intent-update/watch/inbox`) is available in every harness session. Matched emission signals arrive automatically via the inbox hook — no manual polling needed. Author `~/.alice/watchers/*.yaml` to declare standing signal patterns that load at every session start.
+The session command suite (`koad-io session objective/land/intent-update/watch/inbox`) is
+available in every harness session. Matched emission signals arrive automatically via the
+inbox hook — no manual polling needed. Author `~/.alice/watchers/*.yaml` to declare standing
+signal patterns that load at every session start.

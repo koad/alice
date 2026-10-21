@@ -1,102 +1,86 @@
-# Runtime artifacts (regenerate on their own)
+# ──────────────────────────────────────────────────────────────────────────────
+# alice — entity .gitignore
+# ──────────────────────────────────────────────────────────────────────────────
+# This template ships no key material. Everything below exists to keep the key
+# material your machine generates from ever reaching a remote.
+#
+# Rule of thumb: identity is generated on the device that owns it. A private
+# key that leaves its machine has to be rotated, and rotating identity is a
+# ceremony, not a git operation.
+# ──────────────────────────────────────────────────────────────────────────────
+
+# ── Secrets: never, under any circumstances ──────────────────────────────────
+.env
+.env.local
+.env.*.local
+.env.secret*
+.credentials
+*.nsec
+auth.json
+
+# The shipped example is deliberately NOT ignored.
+!.env.example
+
+# ── Cryptographic identity (VESTA-SPEC-149 / SPEC-175) ───────────────────────
+# id/ is excluded by CONTENTS, not by directory. A bare `id/` excludes the
+# directory itself and git will not descend into an excluded directory, so
+# every `!id/...` negation below would be dead code. `id/*` lets git descend
+# and lets the negations actually take effect.
+id/*
+# Public half of the identity — safe, and other entities verify against it.
+!id/entity.public.asc
+!id/entity.fingerprint
+!id/migrated-at
+!id/archive/
+!id/devices/
+# Per-device private keys stay local. The public leaf is what travels.
+id/devices/*/leaf.private.asc
+id/devices/*/device.key
+
+# Entity GPG keyring — private keys, never commit.
+keyring/
+
+# ── Wallets: derived, never persisted ────────────────────────────────────────
+# VESTA-SPEC-113 derives the EVM wallet deterministically from id/ed25519.
+# Persisting it writes a secp256k1 private key to a file git can track. The
+# address can be recomputed at any time; the file cannot be un-leaked.
+wallets/
+
+# ── Derived artifacts (regenerate, do not author) ────────────────────────────
+# AGENTS.md is the context cascade: KOAD_IO.md + ENTITY.md + PRIMER.md.
+# Edit the sources; `koad-io init alice` rebuilds this.
+AGENTS.md
+
+# ── Runtime state ────────────────────────────────────────────────────────────
 .local/
+var/
+tmp/
+.tmp/
+logs/
+*.log
+sessions/
+context-bubbles/
+
+# ── Harness artifacts ────────────────────────────────────────────────────────
+.claude/
+.claude.json
+.opencode/
+mcp-needs-auth-cache.json
+.context
+tui.json
+tooltips/
+
+# ── Build + dependency noise ─────────────────────────────────────────────────
 node_modules/
+dist/
+build/
+__pycache__/
+.pytest_cache/
+.venv/
+
+# ── Editor + OS noise ────────────────────────────────────────────────────────
 .DS_Store
 Thumbs.db
 *.swp
 *.swo
 *~
-.tmp/
-tmp/
-dist/
-
-# Entity GPG keyring — private keys, never commit
-keyring/
-
-# Flight plans — ephemeral dispatch artifacts (durable record is commit trailer)
-flight-plans/
-
-# Claude Code harness artifacts (regenerated per session)
-.claude.json
-.claude/
-mcp-needs-auth-cache.json
-archive/sessions/
-
-# Runtime state
-var/
-
-# opencode TUI session state
-tui.json
-tooltips/
-
-# Private keys — NEVER in git
-id/ed25519
-id/ecdsa
-id/rsa
-id/dsa
-
-# Credentials and secrets
-.credentials
-.env.local
-.env.*.local
-.env.secret*
-
-# Stale harness session dump — never commit
-.context
-
-# Agent logs — regenerable
-logs/
-
-# Runtime caches
-__pycache__/
-.pytest_cache/
-.venv/
-build/
-
-# ── Runtime artifacts — VESTA-SPEC-145 ──────────────────────────────────────
-
-# streams/ — trigger output, log files, event captures; fully regenerable
-streams/
-
-# qc/raw/ — auto-generated QC captures before deliberate review
-qc/raw/
-
-# .local/ — machine-local ephemera (socket files, PID files, temp state)
-.local/
-
-# node_modules/ (if present at entity root)
-node_modules/
-
-# SPEC-175: per-device private key material — never commit
-id/devices/*/leaf.private.asc
-id/devices/*/device.key
-
-# SPEC-175: entity.public.asc is committed (sovereign-certified public identity)
-!id/entity.public.asc
-!id/entity.fingerprint
-!id/migrated-at
-!id/archive/**
-
-
-# Pi harness + opencode/cline TUI artifacts
-.pi/
-auth.json
-bin/
-cache/
-config.toml
-history.jsonl
-installation_id
-log/
-logs_2.sqlite
-logs_2.sqlite-shm
-logs_2.sqlite-wal
-models_cache.json
-sessions/
-settings.json
-shell_snapshots/
-skills/
-state_5.sqlite
-version.json
-.personality_migration
-id/
-*.nsec
