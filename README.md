@@ -46,34 +46,38 @@ about one.
 The fingerprint above is Alice's key. **It is not your key**, and it is the one piece of
 identity material here that you should leave exactly where it is.
 
-Everything else in the way of identity is generated **on the device that owns it**:
+A clone arrives carrying **my** key in `id/`, and `init` decides what to do by looking for
+exactly that file. So the instructions below clear it first — here is why, because it is the
+least obvious thing in this repository:
+
+`init` treats a present `id/entity.public.asc` as *"this entity already has a key"*. With no
+device leaf beside it, it concludes this must be a **second device** and mints a leaf under the
+key already sitting there. That key is mine. Leave it in place and your fresh clone ends up
+with a device leaf hanging off Alice's identity instead of a keypair of its own.
+
+Delete it, and `init` finds no entity key and generates one:
 
 ```bash
 git clone https://github.com/koad/alice.git ~/.alice
+cd ~/.alice && rm -rf id/     # drop my face, so init can grow yours
 koad-io init sovereign        # your sovereign identity — do this first
-koad-io init alice            # this entity's keypair + this device's leaf
+koad-io init alice            # your entity keypair + this device's leaf
 alice                         # launch
 ```
 
-`init sovereign` creates your master identity and this device's leaf key. `init alice` adopts
-the entity: it generates the entity keypair, signs the sigchain entries, scaffolds `.env` if
-you have not copied the example, writes the launcher, and builds `AGENTS.md`. Both commands
-are idempotent — run them as often as you like.
+`init sovereign` creates your master identity and this device's leaf key. With `id/` cleared,
+`init alice` adopts the entity: it generates the entity keypair, signs the sigchain entries,
+scaffolds `.env` if you have not copied the example, writes the launcher, and builds
+`AGENTS.md`. Both commands are idempotent — run them as often as you like.
 
 A clone that has run neither command has **no identity of its own** — no keypair, no leaf, no
 sigchain, nothing that signs in its name. The public key that arrived with the clone is
-Alice's, not the clone's; inheriting it does not make you Alice, and using it for your own
-signatures would produce signatures that verify against the wrong author. Borrowed keys are
-worse than no keys, so make your own:
+Alice's, not the clone's; inheriting it does not make you Alice, and signing with it would
+produce signatures that verify against the wrong author. Borrowed keys are worse than no keys.
 
-```bash
-koad-io init sovereign        # a keypair that is yours, on this machine
-koad-io init alice            # adopt the entity, sign your own sigchain
-```
-
-Once you have run those, `id/` in your tree will differ from this repo's — yours will hold
-your key and your fingerprint. That divergence is the moment the template stopped being a
-face and became you. Commit it if you want your own repo to be your own face.
+Once you have cleared `id/` and re-seeded, `id/` in your tree will differ from this repo's —
+yours will hold your key and your fingerprint. That divergence is the moment the template
+stopped being a face and became you. Commit it if you want your own repo to be your own face.
 
 ---
 

@@ -30,8 +30,14 @@ entity this README describes actually signs its own work.
 
 They are not yours, and a fresh clone has no identity of its own: no keypair, no leaf, no
 sigchain. Nothing here can sign in your name until you generate a key on this device with
-`init sovereign` → `init alice`. When you do, your `id/` will hold *your* key instead —
-which is the correct state, and the sign that the template has become you.
+`init sovereign` → `init alice`.
+
+If you are the one adopting this template, **clear `id/` first** (`rm -rf id/`). `init` reads a
+present `entity.public.asc` as *"this entity already has a key"* and, seeing no device leaf,
+treats your clone as a second device of Alice's — it will mint a leaf under her key rather than
+generate one of yours. With `id/` gone it re-seeds and the key it makes is your own. That is
+the state you want: your `id/` holding your fingerprint is the sign that the template has
+become you.
 
 No private key material is published here, ever. If you find any in this repo, that is a
 mistake worth reporting, not a feature worth using.
