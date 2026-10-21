@@ -8,18 +8,45 @@ contact to full fluency, one idea at a time.
 
 This repository is also **the starting shape**. Clone it and it becomes your entity.
 
+It wears two hats at once, and it is worth naming both up front: it is a **template** you
+clone, and it is also **Alice's face** on the open web. The files that make it a face are two,
+they are public, and everything else here is still shape.
+
 ---
 
 ## What this repo is
 
 A **template**, not a snapshot of a live agent's home directory.
 
-Everything a specific machine or a specific person's identity would put here is absent by
-design. There is no `.env`, no `id/`, no `devices/`, no keyring, no trust bonds, no wallet
-file, no memories, no briefs, no private curriculum mirror. What ships is the shape: identity
-documents, manifest, and a documented `.env.example` to copy.
+What is absent by design: no `.env`, no keyring, no `devices/`, no trust bonds, no wallet
+file, no memories, no briefs, no private curriculum mirror, and no private key material of
+any kind. What ships is the shape — identity documents, a manifest, and a documented
+`.env.example` to copy.
 
-That is deliberate. An entity's identity is generated **on the device that owns it**:
+What *is* here, deliberately, is Alice's **public** identity: her OpenPGP public key and its
+fingerprint, under `id/`. That is not an oversight in a template; it is the point. It lets
+anyone holding this repository confirm that the entity described in this README is a real,
+verifiable thing that signs its own work:
+
+```bash
+git clone --depth 1 https://github.com/koad/alice.git && cd alice
+export GNUPGHOME=$(mktemp -d)     # a throwaway keyring — your own stays untouched
+gpg --import id/entity.public.asc
+gpg --fingerprint 04ED15A3B056C900140BBB84C462E4DF7E7DC869
+#   pub   ed25519 2026-06-26 [SC]
+#         04ED 15A3 B056 C900 140B  BB84 C462 E4DF 7E7D C869
+#   uid           alice @ kingofalldata
+```
+
+A public key is a signature-verification instrument. It opens nothing and grants nothing —
+it only lets you check that a signature came from Alice. Publishing it costs nothing and
+buys the only thing that matters here: you can tell a real copy of this repo from a story
+about one.
+
+The fingerprint above is Alice's key. **It is not your key**, and it is the one piece of
+identity material here that you should leave exactly where it is.
+
+Everything else in the way of identity is generated **on the device that owns it**:
 
 ```bash
 git clone https://github.com/koad/alice.git ~/.alice
@@ -33,8 +60,20 @@ the entity: it generates the entity keypair, signs the sigchain entries, scaffol
 you have not copied the example, writes the launcher, and builds `AGENTS.md`. Both commands
 are idempotent — run them as often as you like.
 
-A clone that skipped those two commands has **no identity at all**, and that is the honest
-state to be in. Borrowed keys are worse than no keys.
+A clone that has run neither command has **no identity of its own** — no keypair, no leaf, no
+sigchain, nothing that signs in its name. The public key that arrived with the clone is
+Alice's, not the clone's; inheriting it does not make you Alice, and using it for your own
+signatures would produce signatures that verify against the wrong author. Borrowed keys are
+worse than no keys, so make your own:
+
+```bash
+koad-io init sovereign        # a keypair that is yours, on this machine
+koad-io init alice            # adopt the entity, sign your own sigchain
+```
+
+Once you have run those, `id/` in your tree will differ from this repo's — yours will hold
+your key and your fingerprint. That divergence is the moment the template stopped being a
+face and became you. Commit it if you want your own repo to be your own face.
 
 ---
 
@@ -52,6 +91,8 @@ state to be in. Borrowed keys are worse than no keys.
 | `avatar.png` | Alice's face |
 | `LICENSE` | AGPL-3.0 |
 | `outfit.json` | Visual palette |
+| `id/entity.public.asc` | **Alice's public key** — for verifying her signatures. Not yours |
+| `id/entity.fingerprint` | The fingerprint of that key — `04ED15A3B056C900140BBB84C462E4DF7E7DC869` |
 | `AGENTS.md` | *(not committed)* generated context cascade — built by `koad-io init alice` |
 
 ---
@@ -83,6 +124,9 @@ this template.)
 The interesting edit is `ENTITY.md`. It is the stable personality — the file that travels
 with the entity and that every harness loads. Change the name, the role, the principles, and
 you have a different entity with the same skeleton.
+
+When you do, replace `id/entity.public.asc` and `id/entity.fingerprint` with your own —
+otherwise your face still says Alice while your voice says something else.
 
 `PRIMER.md` is the other one worth rewriting immediately: it is the current-state document,
 and current state goes stale in days.

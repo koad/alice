@@ -21,6 +21,21 @@ koad-io init alice          # entity keypair + this device's leaf + AGENTS.md
 
 If `AGENTS.md` exists, this entity is live here and the cascade is wired.
 
+### Whose key is in `id/`
+
+This repository ships two public files under `id/`: `entity.public.asc` and
+`entity.fingerprint`. They are **Alice's** key and Alice's fingerprint,
+`04ED15A3B056C900140BBB84C462E4DF7E7DC869` — published so a stranger can verify that the
+entity this README describes actually signs its own work.
+
+They are not yours, and a fresh clone has no identity of its own: no keypair, no leaf, no
+sigchain. Nothing here can sign in your name until you generate a key on this device with
+`init sovereign` → `init alice`. When you do, your `id/` will hold *your* key instead —
+which is the correct state, and the sign that the template has become you.
+
+No private key material is published here, ever. If you find any in this repo, that is a
+mistake worth reporting, not a feature worth using.
+
 ---
 
 ## What Alice Does
@@ -67,6 +82,8 @@ template.)
 |------|---------|
 | `ENTITY.md` | Identity, role, teaching methodology, behavioral constraints |
 | `PRIMER.md` | This file — current state, for whoever arrives next |
+| `id/entity.public.asc` | **Alice's** public key — for verifying her signatures. Not yours |
+| `id/entity.fingerprint` | Fingerprint of that key — `04ED15A3B056C900140BBB84C462E4DF7E7DC869` |
 | `.env.example` | Documented environment variables; copy to `.env` if you need to override |
 | `passenger.json` | Entity manifest — handle, role, buttons, skills |
 | `~/.koad-io/` | The framework: commands, harness, daemon, helpers |
